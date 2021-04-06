@@ -1,0 +1,25 @@
+.btn-wp {
+    color: rgb(246, 246, 246);
+
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+
+    padding: 1.5rem;
+    border-radius: 50%;
+    background-color: $color-wp;
+
+    @include shadow;
+
+    transition: .3s all ease-in-out;
+
+    &:hover {
+        background-color:  white;
+        color: $color-wp;
+    }
+
+    svg {
+        width: 5rem;
+        height: 5rem;
+    }
+}

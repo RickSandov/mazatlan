@@ -1,0 +1,53 @@
+.header {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+
+    &__bc {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+
+        & img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__content {
+        position: absolute;
+        bottom: 6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        & .btn {
+            font-size: 2.3rem;
+            padding: 1.5rem 10rem;
+            margin-bottom: 2rem;
+        }
+    }
+
+    & svg {
+        cursor: pointer;
+        position: absolute;
+        bottom: 2.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        height: 3rem;
+        width: 3rem;
+        transition: .3s all ease-in-out;
+
+        &:hover {
+            height: 3.5rem;
+            width: 3.5rem;
+        }
+
+    }
+
+}

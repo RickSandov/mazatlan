@@ -1,0 +1,106 @@
+nav {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    background-color: rgba(#3e3e3e, .5);
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+
+    & .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2.5rem 0;
+
+        width: 1350px;
+        max-width: 95%;
+
+        &__logo {
+            display: flex;
+            align-items: center;
+
+            & svg {
+                width: 8rem;
+                height: 8rem;
+                fill: white;
+            }
+
+        }
+
+        &__name {
+            margin-left: .5rem;
+
+            & p {
+                color: white;
+                font-size: 2rem;
+                font-weight: 200;
+                line-height: 1;
+                text-transform: uppercase;
+
+                & strong {
+                    color: white;
+                    display: block;
+                    font-size: 3rem;
+                }
+            }
+        }
+
+
+        &__links {
+            text-transform: uppercase;
+            font-weight: 200;
+
+            & .link {
+                font-size: 1.5rem;
+                transition: .3s all linear;
+                // border-bottom: 3px solid rgba(white, .1);
+                padding: .5rem 1rem;
+
+                &:hover {
+                    // border-bottom: 3px solid white;
+                    color: #3e3e3e;
+                    background-color: white;
+                }
+
+                &:nth-child(2) {
+                    margin: 0 2rem;
+                }
+            }
+            
+        }
+
+    }
+}
+
+
+
+
+@include respond(tab-port) {
+    .nav {}
+
+}
+
+
+
+.mobile {
+    @include respond(from-tab-land) {
+        display: none;
+    }
+
+    position: fixed;
+    bottom: 0;
+    // height: 40px;
+    width: 100vw;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem 0;
+    background-color: $color-text;
+    z-index: 100;
+
+    .btn {
+        width: 45%;
+        text-align: center;
+        padding: 15px 0;
+    }
+}

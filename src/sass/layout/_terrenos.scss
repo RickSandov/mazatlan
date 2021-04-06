@@ -1,0 +1,64 @@
+.terrenos-title {
+    width: 100vw;
+    background-color: $color-text;
+    color: white;
+    padding: 4rem 0;
+    margin: 5rem 0;
+
+    & h1 {
+        font-weight: 400;
+        text-transform: uppercase;
+        line-height: 1.2;
+        font-size: 2rem;
+        text-align: center;
+
+        & strong {
+            display: block;
+            font-size: 3.5rem;
+        }
+    }
+}
+
+
+.terrenos {
+    max-width: 90%;
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto;
+
+    // &__img {}
+
+    &__base {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    & .cls-1 {
+        stroke: rgb(172, 172, 172);
+        stroke-width: 3px;
+        transition: .3s all ease-in-out;
+        cursor: pointer;
+
+        
+    }
+
+    & .available .cls-1 {
+        fill: white;
+
+        &:hover {
+            fill: $color-success;
+        }
+    }
+
+    & .unavailable .cls-1 {
+        fill: $color-danger;
+
+        &:hover {
+            fill: darken($color-danger, 10);
+        }
+    }
+
+}

@@ -1,0 +1,11 @@
+.card {
+    background-color: white;
+    border-radius: 6px;
+    @include shadow;
+    margin: 0 auto;
+
+    margin-top: -7rem;
+    // position: absolute;
+    color: $color-text;
+}
+

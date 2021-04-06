@@ -1,0 +1,146 @@
+// $color-primary: #11998e;
+// $color-secondary: #38ef7d;
+$white: #fff;
+$gray: #9b9b9b;
+
+.form__group {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    width: 50%;
+
+    &:nth-child(2) {
+        margin: 4rem 0;
+    }
+
+}
+
+.form__field {
+    font-family: inherit;
+    width: 200%;
+    border: 0;
+    border-bottom: 2px solid $gray;
+    outline: 0;
+    font-size: 1.3rem;
+    color: $color-text;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+        color: transparent;
+    }
+
+    &:placeholder-shown~.form__label {
+        font-size: 1.3rem;
+        cursor: text;
+        top: 20px;
+    }
+}
+
+.form__label {
+    position: absolute;
+    top: -.5rem;
+    display: block;
+    transition: 0.2s;
+    font-size: 1.5rem;
+    color: $gray;
+}
+
+.form__field:focus {
+    ~.form__label {
+        position: absolute;
+        top: 0;
+        display: block;
+        transition: 0.2s;
+        font-size: 1rem;
+        color: $color-primary;
+        font-weight: 700;
+    }
+
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, $color-primary, white);
+    border-image-slice: 1;
+}
+
+/* reset input */
+.form__field {
+
+    &:required,
+    &:invalid {
+        box-shadow: none;
+    }
+}
+
+
+.contact-bc {
+    height: 300px;
+    width: 100%;
+    background-color: $color-text;
+    margin-top: 5rem;
+}
+
+.contact-box {
+    width: 100%;
+    margin-top: -250px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8rem;
+}
+
+.contact {
+    background-color: white;
+    max-width: 90%;
+    width: 1200px;
+    padding: 4rem 5rem;
+    border-radius: .5rem;
+    @include shadow;
+
+    &__title {
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 4rem;
+
+        & h3 {
+            font-size: 4rem;
+            font-weight: 400;
+        }
+    }
+
+    &__form {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    &__inputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        // width: 40%;
+        flex: 0 1 calc(50% - 3rem);
+
+        & p {
+            // margin-top: 3rem;
+            margin: 3rem 0 1rem 0;
+            font-size: 1.4rem;
+            color: $gray;
+        }
+
+        & textarea {
+            width: 200%;
+            height: 200px;
+            resize: none;
+            border: 2px solid $gray;
+            outline: none;
+            padding: 1rem;
+            font-size: 1.3rem;
+        }
+    }
+
+
+
+}

@@ -1,0 +1,131 @@
+$calendar-width: 40;
+
+@mixin text-shadow {
+    text-shadow: .3rem .5rem rgba(black, .05);
+}
+
+.calendar {
+    @include shadow-light;
+    border-radius: .5rem;
+    overflow: hidden;
+    color: $color-text;
+
+    &__month {
+        width: 100%;
+        background-color: $color-primary;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2rem 1rem;
+        @include text-shadow;
+
+        & svg {
+            height: 3rem;
+            width: 3rem;
+            cursor: pointer;
+        }
+
+        & .prev {
+            transform: rotate(90deg);
+        }
+
+        & .date {
+            text-align: center;
+
+            & h4 {
+                font-size: 2.5rem;
+                font-weight: 400;
+                letter-spacing: .2rem;
+                text-transform: uppercase;
+            }
+
+            & p {
+                font-size: 1-8rem;
+                font-weight: 200;
+                text-transform: capitalize;
+            }
+
+        }
+
+        & .next {
+            transform: rotate(-90deg);
+        }
+    }
+
+    &__weekdays {
+        width: 100%;
+        padding: 1rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        & div {
+            // letter-spacing: .1rem;
+            font-size: 1.5rem;
+            font-weight: 400;
+            display: flex;
+            justify-content: center;
+            @include text-shadow;
+            width: calc(#{$calendar-width}rem / 7);
+        }
+
+    }
+
+    &__days {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(7, calc(#{$calendar-width}rem / 7));
+
+        padding: 1rem;
+
+        & div {
+            border-radius: 50%;
+            grid-column: span 1;
+            border: 3px solid transparent;
+            font-size: 1.4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: .5rem;
+
+            width: calc((#{$calendar-width}rem - (.5rem * 14)) / 7);
+            height: calc((#{$calendar-width}rem - (.5rem * 14)) / 7);
+            @include text-shadow;
+
+            transition: .3s all ease-in-out;
+            cursor: pointer;
+
+            &:hover:not(.today) {
+                border: 3px solid rgba($color-primary, .3);
+            }
+        }
+
+        & div.disabled {
+
+            &:hover {
+                border: 3px solid rgba($color-danger, .3);
+            }
+        }
+
+        & .today {
+            border: 3px solid $color-primary;
+            background-color: $color-primary;
+            color: white;
+
+            // &:hover {
+            //     border: 3px solid rgba($color-text, .5);
+            // }
+        }
+
+        & div.prev-date,
+        & div.next-date {
+            opacity: .4;
+
+            &:hover {
+                border: 3px solid rgba($color-text, .5);
+            }
+        }
+    }
+}
