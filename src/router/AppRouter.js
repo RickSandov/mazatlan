@@ -15,7 +15,8 @@ export const AppRouter = () => {
                 <Navbar />
 
                 <Switch>
-                    <Route path="/" component={ MainPage } ></Route>
+
+                    <Route exact path="/" component={ MainPage } ></Route>
                     
                     <Redirect to="/" ></Redirect>
                 </Switch>

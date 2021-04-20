@@ -1,37 +1,45 @@
 import React, { useState } from 'react';
-import { lots } from '../../data/data';
-import { Modal } from './Modal';
+import { InfoTerreno } from './InfoTerreno';
+import { useFetch } from '../../hooks/useFetch';
 
 export const Terrenos = () => {
 
 
     const [state, setstate] = useState({
-        modal: false,
-        lotId: 0
+        lotId: 0,
+        manzana: 0,
+        area: 0,
+        available: true
     });
 
+    const [isSelected, setIsSelected] = useState(null);
 
-    const { modal, lotId } = state;
+    const { data } = useFetch('http://189.155.227.107:3000/api/lot');
 
-    const hanldeClick = (id, available) => {
+    const { lotId, manzana, area, available } = state;
 
-        if (available) {
-            setstate(
-                {
-                    modal: true,
-                    lotId: id
-                }
-            );
-        };
-    }
 
-    const handleClose = () => {
+    const hanldeClick = (lotId, id, manzana, area, available) => {
+
         setstate(
             {
-                modal: false,
-                lotId: !lotId
+                lotId,
+                manzana,
+                area,
+                available
             }
         );
+
+        const lote = data?.lots.find(lot => lot._id === id)
+
+        lote.selected = true;
+
+        if (isSelected) {
+            data.lots.find(lot => lot._id === isSelected).selected = false
+        }
+
+        setIsSelected(lote._id);
+
     }
 
 
@@ -42,6 +50,7 @@ export const Terrenos = () => {
             </div>
 
             <div className="terrenos">
+
                 <div className="terrenos__img">
 
                     <img src="./assets/images/terreno.jpg" alt="terreno"></img>
@@ -51,14 +60,13 @@ export const Terrenos = () => {
 
                         {
 
-                            lots.map(({ id, htmlContent, available }) =>
+                            data?.lots.map(({ _id, htmlContent, available, manzana, selected, planId, area }) =>
                             (
                                 <g
-                                    key={id}
-                                    id={id}
-                                    className={available ? 'available' : 'unavailable'}
+                                    key={`${manzana}-${planId}-${_id}`}
+                                    className={`${available ? 'available' : 'unavailable'} ${selected && 'selected'}`}
                                     dangerouslySetInnerHTML={{ __html: htmlContent }}
-                                    onClick={() => hanldeClick(id, available)}
+                                    onClick={() => hanldeClick(planId, _id, manzana, area, available)}
                                 ></g>
                             )
                             )
@@ -67,15 +75,15 @@ export const Terrenos = () => {
 
                     </svg>
                 </div>
+
+                <div className="terrenos__info">
+                    {
+                        !isSelected ? <h3 className="select-lot" >Selecciona un terreno para ver su información...</h3> : <InfoTerreno manzana={manzana} area={area} lotNum={lotId} available={available} ></InfoTerreno>
+                    }
+                </div>
+
+
             </div>
-
-            {
-                modal && <Modal id={lotId} /> 
-            }
-
-            {
-                modal && <button onClick={handleClose} className="close">close modal</button>
-            }
 
         </div>
     )

@@ -1,14 +1,23 @@
-$calendar-width: 40;
-
 @mixin text-shadow {
     text-shadow: .3rem .5rem rgba(black, .05);
 }
 
 .calendar {
+
+    $calendar-width: 40;
+
+    @include respond(tab-port) {
+        margin-top: 2rem;
+        // $calendar-width: 32;
+    }
+
     @include shadow-light;
     border-radius: .5rem;
     overflow: hidden;
     color: $color-text;
+
+  
+
 
     &__month {
         width: 100%;
@@ -69,6 +78,10 @@ $calendar-width: 40;
             justify-content: center;
             @include text-shadow;
             width: calc(#{$calendar-width}rem / 7);
+
+            @include respond(tab-port) {
+                width: calc(32rem / 7);
+            }
         }
 
     }
@@ -77,6 +90,10 @@ $calendar-width: 40;
         width: 100%;
         display: grid;
         grid-template-columns: repeat(7, calc(#{$calendar-width}rem / 7));
+
+        @include respond(tab-port) {
+            grid-template-columns: repeat(7, calc(32rem / 7));
+        }
 
         padding: 1rem;
 
@@ -93,6 +110,11 @@ $calendar-width: 40;
             width: calc((#{$calendar-width}rem - (.5rem * 14)) / 7);
             height: calc((#{$calendar-width}rem - (.5rem * 14)) / 7);
             @include text-shadow;
+
+            @include respond(tab-port) {
+                width: calc((32rem - (.5rem * 14)) / 7);
+                height: calc((32rem - (.5rem * 14)) / 7);
+            }
 
             transition: .3s all ease-in-out;
             cursor: pointer;

@@ -5,6 +5,8 @@ export const ContactForm = () => {
     return (
         <>
 
+        
+
             <div className="contact-bc"></div>
 
             <div id="contacto" className="contact-box">
@@ -42,6 +44,7 @@ export const ContactForm = () => {
                             <Calendar />
                         </div>
                     </div>
+                    <button href="" className="btn btn-send">Enviar</button>
                 </div>
             </div>
 

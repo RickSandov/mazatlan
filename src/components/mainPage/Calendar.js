@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 
 export const Calendar = () => {
 
-    let appointment;
-
     const [month, setMonth] = useState(new Date().getMonth());
+
 
     const date = new Date();
     date.setDate(1);
@@ -50,15 +49,16 @@ export const Calendar = () => {
         new Date().getMonth() <= month -1 && setMonth(month - 1); 
     }
 
+    const [appointmentDate, setappointmentDate] = useState(`${monthString}`);
+
     const handleSetDay = ({target}, day) => {
+        setappointmentDate(`${monthString} ${day}`);
+
         document.querySelector(".today")?.classList.remove("today");
         target.classList.add("today");
-
-        appointment = `${monthString} ${day}`;
-        console.log(appointment);
     }
 
-    
+    console.log(appointmentDate);
 
     return (
         <div className="calendar">

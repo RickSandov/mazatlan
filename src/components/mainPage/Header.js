@@ -1,20 +1,20 @@
 import React from 'react';
-import {
-    Link
-} from "react-router-dom";
 
 export const Header = () => {
     return (
-        <header className="header" >
+        <header data-page="head" className="header" >
 
             <div className="header__bc">
-                <img src="./assets/images/hero.png" alt="" />
+                <video autoPlay="autoplay" muted loop>
+                    <source src="./assets/mzt.mp4" type="video/mp4" />
+                </video>
+                
             </div>
 
             <div className="header__content">
-                <Link to="/" className="btn btn-ghost">
+                <a href="#terrenos" className="btn btn-ghost">
                     Conoce el Proyecto
-                </Link>
+                </a>
             </div>
 
             <a  id="inicio" href="#terrenos">

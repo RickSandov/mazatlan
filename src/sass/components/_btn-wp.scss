@@ -4,6 +4,7 @@
     position: fixed;
     bottom: 2rem;
     right: 2rem;
+    z-index: 3;
 
     padding: 1.5rem;
     border-radius: 50%;
@@ -12,6 +13,8 @@
     @include shadow;
 
     transition: .3s all ease-in-out;
+
+    transform: scale(0);
 
     &:hover {
         background-color:  white;
@@ -23,3 +26,10 @@
         height: 5rem;
     }
 }
+
+.d-block {
+    transition: .3s all ease-in-out;
+    transform: scale(1);
+}
+
+

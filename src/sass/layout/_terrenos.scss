@@ -19,16 +19,82 @@
     }
 }
 
+#terrenos {
+    animation-name: appear;
+    animation-duration: 1s;
+}
+
 
 .terrenos {
-    max-width: 90%;
-    width: 1000px;
+    animation-name: appear;
+    animation-duration: 1s;
+    max-width: 95%;
+    width: 1350px;
     display: flex;
-    justify-content: center;
-    position: relative;
+    // flex-direction: column;
+    justify-content: space-between;
     margin: 0 auto;
 
-    // &__img {}
+    &__img {
+        position: relative;
+        width: 100%;
+        flex: 0 1 calc(70% - 1rem);
+    }
+
+    &__info {
+        width: 100%;
+        flex: 0 1 calc(30% - 1rem);
+        animation-name: appear;
+        animation-duration: 1s;
+
+        & h3.select-lot {
+            margin-top: 4rem;
+        }
+
+        & .lot {
+            animation-name: appear;
+            animation-duration: 1s;
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 8rem;
+
+            &__title {
+                margin-bottom: 3rem;
+            }
+
+            &__field {
+                align-self: flex-start;
+
+                &.area {
+                    margin: 2rem 0;
+                }
+
+                &.svcs {
+                    color: lighten($color-text,  50);
+                    font-size: 1.5rem;
+                    align-self: center;
+                    margin: 4rem;
+                }
+            }
+
+            &__btn {
+                color: white;
+                background-color: $color-success;
+                padding: 1rem 2rem;
+
+                &.sold {
+                    background-color: $color-danger;
+                }
+            }
+
+        }
+
+        
+        
+
+    }
 
     &__base {
         position: absolute;
@@ -37,16 +103,17 @@
     }
 
     & .cls-1 {
-        stroke: rgb(172, 172, 172);
+        // stroke: rgb(172, 172, 172);
+        stroke: white;
         stroke-width: 3px;
         transition: .3s all ease-in-out;
         cursor: pointer;
 
-        
+
     }
 
     & .available .cls-1 {
-        fill: white;
+        fill: rgb(172, 172, 172);
 
         &:hover {
             fill: $color-success;
@@ -58,6 +125,26 @@
 
         &:hover {
             fill: darken($color-danger, 10);
+        }
+    }
+
+    & .selected .cls-1 {
+        fill: cornflowerblue;
+
+        &:hover {
+            fill: darken(cornflowerblue, 10)
+        }
+    }
+
+    @include respond(tab-port){
+        flex-direction: column;
+        align-items: center;
+
+        &__info {
+
+            & .lot {
+                margin-top: 3rem;
+            }
         }
     }
 
