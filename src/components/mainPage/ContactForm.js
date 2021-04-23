@@ -1,11 +1,65 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useForm } from '../../hooks/useForm';
+import { UserContext } from '../UserContext';
 import { Calendar } from './Calendar'
 
 export const ContactForm = () => {
+
+    const initialForm = {
+        name: '',
+        phone: 0,
+        email: '',
+        msg: ''
+    };
+
+    const [formValues, handleInputChange] = useForm(initialForm);
+
+    const { name, phone, email, msg } = formValues;
+
+    const { formFields, setFormFields } = useContext(UserContext);
+
+    const handleChange = ({ target }) => {
+        const value = target.value;
+        setFormFields({ ...formFields, [target.name]: value });
+    }
+
+
+    const sendWp = () => {
+        const wpMsg = `https://api.whatsapp.com/send/?phone=%2B526181479256&text=Buen día, quisiera pedir informes sobre el terreno número ${formFields.lotId} de la manzana ${formFields.manzana} del proyecto Colinas del Mar`;
+
+        window.open(wpMsg);
+    }
+
+    const sendForm = () => {
+
+        const { name, phone, email, msg, lotId, date } = formFields;
+
+        const contactInfo = JSON.stringify(
+            {
+                name,
+                phone,
+                email,
+                msg,
+                _id: lotId,
+                date
+            }
+        )
+
+        fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: contactInfo
+        }
+        )
+
+    }
+
     return (
         <>
 
-        
+
 
             <div className="contact-bc"></div>
 
@@ -18,24 +72,47 @@ export const ContactForm = () => {
                     <div className="contact__form">
                         <div className="contact__inputs">
                             <div className="form__group">
-                                <input type="input" className="form__field" placeholder="Nombre" name="name" id='name' required />
+                                <input type="input"
+                                    value={name}
+                                    className="form__field"
+                                    onChange={e => {
+                                        handleInputChange(e);
+                                        handleChange(e);
+                                    }}
+                                    placeholder="Nombre" name="name" id='name' required />
                                 <label htmlFor="name" className="form__label">Nombre</label>
                             </div>
 
                             <div className="form__group">
-                                <input type="number" className="form__field" placeholder="Su número" name="phone" id='phone' required />
+                                <input type="number" className="form__field"
+                                    onChange={e => {
+                                        handleInputChange(e);
+                                        handleChange(e);
+                                    }}
+                                    value={phone}
+                                    placeholder="Su número" name="phone" id='phone' required />
                                 <label htmlFor="phone" className="form__label">Número de Contacto</label>
                             </div>
 
                             <div className="form__group">
-                                <input type="email" className="form__field" placeholder="Email" name="email" id='email' required />
+                                <input type="email"
+                                    value={email}
+                                    className="form__field"
+                                    onChange={e => {
+                                        handleInputChange(e);
+                                        handleChange(e);
+                                    }}
+                                    placeholder="Email" name="email" id='email' required />
                                 <label htmlFor="email" className="form__label">Email</label>
                             </div>
 
 
                             <div className="form__group">
                                 <p>Mensaje</p>
-                                <textarea name="message" id="message"></textarea>
+                                <textarea name="msg" id="msg" value={msg} onChange={e => {
+                                    handleInputChange(e);
+                                    handleChange(e);
+                                }} ></textarea>
                             </div>
 
                         </div>
@@ -44,7 +121,12 @@ export const ContactForm = () => {
                             <Calendar />
                         </div>
                     </div>
-                    <button href="" className="btn btn-send">Enviar</button>
+
+                    <div className="contact__buttons">
+                        <button onClick={sendForm} className="btn btn-send">Enviar</button>
+                        {formFields.active && <button className="btn btn-send-wp" onClick={sendWp} >Enviar por Whatsapp</button>}
+                    </div>
+
                 </div>
             </div>
 

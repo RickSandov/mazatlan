@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { UserContext } from '../UserContext';
 
 export const Calendar = () => {
 
     const [month, setMonth] = useState(new Date().getMonth());
-
 
     const date = new Date();
     date.setDate(1);
@@ -49,16 +49,21 @@ export const Calendar = () => {
         new Date().getMonth() <= month -1 && setMonth(month - 1); 
     }
 
-    const [appointmentDate, setappointmentDate] = useState(`${monthString}`);
+    const [ , setappointmentDate] = useState(`${monthString}`);
+
+    const { formFields, setFormFields } = useContext(UserContext);
+
+    
 
     const handleSetDay = ({target}, day) => {
-        setappointmentDate(`${monthString} ${day}`);
-
+        const newDate = `${monthString} ${day}`;
+        setappointmentDate(newDate);
+        
         document.querySelector(".today")?.classList.remove("today");
         target.classList.add("today");
+        
+        setFormFields({...formFields, date: newDate});
     }
-
-    console.log(appointmentDate);
 
     return (
         <div className="calendar">
@@ -101,7 +106,7 @@ export const Calendar = () => {
                     days.map(day => (
                        (day === new Date().getDate() && date.getMonth() === new Date().getMonth()) 
                         ? 
-                        (<div key={day} className="today" onClick={(e) => handleSetDay(e, day)}>{day}</div>) 
+                        (<div key={day} onClick={(e) => handleSetDay(e, day)}>{day}</div>) 
                         : 
                         (date.getMonth() === new Date().getMonth() && day < new Date().getDate())
                         ?

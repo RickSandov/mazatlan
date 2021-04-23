@@ -120,7 +120,7 @@
             cursor: pointer;
 
             &:hover:not(.today) {
-                border: 3px solid rgba($color-primary, .3);
+                border: 3px solid rgba($color-success, .3);
             }
         }
 

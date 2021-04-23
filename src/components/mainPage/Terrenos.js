@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { InfoTerreno } from './InfoTerreno';
+import { UserContext } from '../UserContext';
 import { useFetch } from '../../hooks/useFetch';
 
 export const Terrenos = () => {
@@ -9,24 +10,34 @@ export const Terrenos = () => {
         lotId: 0,
         manzana: 0,
         area: 0,
-        available: true
+        available: true,
+        isCorner: false,
+        type: 'A'
     });
 
     const [isSelected, setIsSelected] = useState(null);
 
-    const { data } = useFetch('http://189.155.227.107:3000/api/lot');
+    const { data } = useFetch('/api/lot');
 
-    const { lotId, manzana, area, available } = state;
+    const { lotId, manzana, area, available, isCorner, type } = state;
+
+    const { formFields, setFormFields } = useContext(UserContext);
+
+    const handleChange = (id, lotId, manzana) => {
+        setFormFields({ ...formFields, _id: id, lotId: lotId, manzana: manzana, active: true })
+
+    }
 
 
-    const hanldeClick = (lotId, id, manzana, area, available) => {
+    const hanldeClick = (lotId, id, manzana, area, available, isCorner) => {
 
         setstate(
             {
                 lotId,
                 manzana,
                 area,
-                available
+                available,
+                isCorner
             }
         );
 
@@ -43,6 +54,8 @@ export const Terrenos = () => {
     }
 
 
+    const screenWidth = window.innerWidth;
+
     return (
         <div id="terrenos">
             <div className="terrenos-title" >
@@ -53,21 +66,40 @@ export const Terrenos = () => {
 
                 <div className="terrenos__img">
 
-                    <img src="./assets/images/terreno.jpg" alt="terreno"></img>
+                    <img id='terrenos-img' src="./assets/images/terreno.jpg" alt="terreno"></img>
 
 
                     <svg id="lots-container" className="terrenos__base" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
 
                         {
 
-                            data?.lots.map(({ _id, htmlContent, available, manzana, selected, planId, area }) =>
+                            data?.lots.map(({ _id, htmlContent, available, manzana, selected, planId, area, isCorner, type }) =>
                             (
-                                <g
-                                    key={`${manzana}-${planId}-${_id}`}
-                                    className={`${available ? 'available' : 'unavailable'} ${selected && 'selected'}`}
-                                    dangerouslySetInnerHTML={{ __html: htmlContent }}
-                                    onClick={() => hanldeClick(planId, _id, manzana, area, available)}
-                                ></g>
+
+                                screenWidth <= 789 ? (
+                                    <a key={_id} href='#info-terrenos'>
+                                        <g
+                                            className={`${available ? 'available' : 'unavailable'} ${selected && 'selected'}`}
+                                            dangerouslySetInnerHTML={{ __html: htmlContent }}
+                                            onClick={() => {
+                                                hanldeClick(planId, _id, manzana, area, available, isCorner, type);
+                                                handleChange(_id, planId, manzana);
+                                            }}
+                                        ></g>
+                                    </a>
+                                ) : (
+                                    <g
+                                        key={_id} className={`${available ? 'available' : 'unavailable'} ${selected && 'selected'}`}
+                                        dangerouslySetInnerHTML={{ __html: htmlContent }}
+                                        onClick={() => {
+                                            hanldeClick(planId, _id, manzana, area, available, isCorner, type);
+                                            handleChange(_id, planId, manzana);
+                                        }}
+                                    ></g>
+                                )
+
+
+
                             )
                             )
 
@@ -76,11 +108,12 @@ export const Terrenos = () => {
                     </svg>
                 </div>
 
-                <div className="terrenos__info">
+                <div className="terrenos__info" id="info-terrenos">
                     {
-                        !isSelected ? <h3 className="select-lot" >Selecciona un terreno para ver su información...</h3> : <InfoTerreno manzana={manzana} area={area} lotNum={lotId} available={available} ></InfoTerreno>
+                        !isSelected ? <h3 className="select-lot" >Selecciona un terreno para ver su información...</h3> : <InfoTerreno manzana={manzana} area={area} lotNum={lotId} available={available} isCorner={isCorner} type={type}></InfoTerreno>
                     }
                 </div>
+
 
 
             </div>

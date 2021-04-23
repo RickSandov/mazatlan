@@ -6,7 +6,8 @@ export const Pres = () => {
             <h2>Proyecto<strong>colinas del mar</strong></h2>
             <div className="sep"></div>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum esse dicta repudiandae sit tempora quibusdam sed dolores adipisci excepturi consequuntur perspiciatis at magni in amet commodi minima fugit eaque, aspernatur non. Earum adipisci minima doloribus! Quis voluptas iusto eligendi qui, rerum vitae repellat culpa cum, reprehenderit veritatis tempore, distinctio sint doloribus. Animi expedita optio aliquam architecto nemo at a dicta, aperiam blanditiis molestias similique praesentium velit? Quo dignissimos at vero!
+                En Sibra nos preocupa tu patrimonio. Queremos brindarles, a ti y a tu familia, un vivienda digna en la cual crecer y prosperar.
+                El proyecto Colinas del Mar, que queda a tan sólo 15 minutos del malecón, te ofrece una plusvalía a corto plazo de más del 50% en retorno de forma que estarás invirtiendo tu dinero de forma inteligente. No dudes en acercarte y pedir información sobre la mejor opción para la economía y el patrimonio de tu familia.
             </p>
         </div>
     )

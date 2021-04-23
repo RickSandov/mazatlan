@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "react";
 
 export const useForm = (initialState) => {
     
@@ -25,6 +25,7 @@ export const useForm = (initialState) => {
           ...values,
           [target.name]: value,
         });
+        
       };
 
       return [ values, handleInputChange, reset, changeValue ]
