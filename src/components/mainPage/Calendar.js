@@ -5,25 +5,31 @@ export const Calendar = () => {
 
     const [month, setMonth] = useState(new Date().getMonth());
 
+
     const date = new Date();
-    date.setDate(1);
+    // date.setDate(1);
     date.setMonth(month);
-    date.getMonth() === new Date().getMonth() && date.setDate(new Date().getDate())
+    date.getMonth() === new Date().getMonth() && date.setDate(new Date().getDate());
+    
     
     const options = { weekday: 'long', month: 'long', day: 'numeric' };
     const dateString = date.toLocaleDateString('es-MX', options);
-    const firstDay = date.getDay();
+    // const firstDay = date.getDay();
     
     const monthString = dateString.split(' ')[3];
+    
 
     // Get last day of current month
     const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 
     const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+    const prevLastDays = new Date(date.getFullYear(), date.getMonth(), 0).getDay();
 
     const lastWeekDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
 
-    let nextDaysNum = lastWeekDay !== 6 && 7 - lastWeekDay - 1;
+    const nextDaysNum = lastWeekDay === 6 ? 0 : 6 - lastWeekDay;
+    
+    
 
     let prevDays = [];
     let days = [];
@@ -33,7 +39,7 @@ export const Calendar = () => {
         days.push(i);
     }
 
-    for (let j = firstDay; j > 0; j--) {
+    for (let j = prevLastDays+1; j > 0; j--) {
         prevDays.push(prevLastDay - j + 1)
     }
 
@@ -106,7 +112,7 @@ export const Calendar = () => {
                     days.map(day => (
                        (day === new Date().getDate() && date.getMonth() === new Date().getMonth()) 
                         ? 
-                        (<div key={day} onClick={(e) => handleSetDay(e, day)}>{day}</div>) 
+                        (<div className="today-day" key={day} onClick={(e) => handleSetDay(e, day)}>{day}</div>) 
                         : 
                         (date.getMonth() === new Date().getMonth() && day < new Date().getDate())
                         ?

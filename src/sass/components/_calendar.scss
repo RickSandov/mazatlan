@@ -141,6 +141,10 @@
             // }
         }
 
+        & .today-day {
+            font-weight: bold;
+        }
+
         & div.prev-date,
         & div.next-date {
             opacity: .4;

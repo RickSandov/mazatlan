@@ -2,7 +2,7 @@ import React from 'react'
 
 export const InfoTerreno = ({ manzana, area=95, lotNum, available, isCorner=true, type }) => {
 
-    const firstPrice = ((isCorner ? 1406.25 : 1650) * (area.$numberDecimal ? area.$numberDecimal : area)).toFixed(2);
+    const firstPrice = ((!isCorner ? 1250 : 1550) * (area.$numberDecimal ? area.$numberDecimal : area)).toFixed(2);
 
     const [ints, decs] = firstPrice.split('.');
 
