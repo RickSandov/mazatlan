@@ -17,7 +17,7 @@ export const Terrenos = () => {
 
     const [isSelected, setIsSelected] = useState(null);
 
-    const { data } = useFetch('https://colinasdelmar.sibradgo.com/api/lot');
+    const { data } = useFetch('/api/lot');
 
     const { lotId, manzana, area, available, isCorner, type } = state;
 
