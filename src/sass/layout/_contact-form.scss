@@ -97,6 +97,8 @@ $gray: #9b9b9b;
     padding: 4rem 5rem;
     border-radius: .5rem;
     @include shadow;
+    position: relative;
+    
 
     &__title {
         text-align: center;

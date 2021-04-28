@@ -1,0 +1,36 @@
+.snackbar {
+    font-size: 2.5rem;
+    padding: 2rem 3rem;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    opacity: 0;
+    pointer-events: none;
+    border-radius: .5rem;
+    @include shadow-light;
+    animation: 4s snackbar;
+    transition: 1s all linear;
+    
+    &.res-ok {
+        background-color: $color-success;
+    }
+
+    &.res-error {
+        background-color: $color-danger;
+    }
+}
+
+@keyframes snackbar {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    
+    100% {
+        opacity: 0;
+    }
+}

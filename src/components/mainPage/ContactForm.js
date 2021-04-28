@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from '../../hooks/useForm';
 import { UserContext } from '../UserContext';
 import { Calendar } from './Calendar'
@@ -12,11 +12,17 @@ export const ContactForm = () => {
         msg: ''
     };
 
-    const [formValues, handleInputChange] = useForm(initialForm);
+    const [formValues, handleInputChange, reset] = useForm(initialForm);
 
     const { name, phone, email, msg } = formValues;
 
     const { formFields, setFormFields } = useContext(UserContext);
+
+    const [formFeedback, setFormFeedback] = useState({
+        active: false,
+        msg: '',
+        className: ''
+    });
 
     const handleChange = ({ target }) => {
         const value = target.value;
@@ -30,7 +36,7 @@ export const ContactForm = () => {
         window.open(wpMsg);
     }
 
-    const sendForm = () => {
+    const sendForm = async () => {
 
         const { name, phone, email, msg, lotId, date } = formFields;
 
@@ -45,14 +51,37 @@ export const ContactForm = () => {
             }
         )
 
-        fetch('/api/contact', {
+        const fetchResponse = (await fetch('/api/contact', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: contactInfo
         }
-        )
+        ));
+
+        if (fetchResponse.ok) {
+            setFormFeedback({
+                active: true,
+                msg: 'Datos enviados',
+                className: 'res-ok'
+            })
+            reset();
+        } else {
+            setFormFeedback({
+                active: true,
+                msg: 'Ocurrió un problema al enviar la información. Inténtelo de nuevo o envíe por Whatsapp.',
+                className: 'res-error'
+            })
+        }
+
+        setTimeout(()=> {
+            setFormFeedback({
+                active: false,
+                msg: '',
+                className: ''
+            })
+        },2500)
 
     }
 
@@ -126,6 +155,12 @@ export const ContactForm = () => {
                         <button onClick={sendForm} className="btn btn-send">Enviar</button>
                         {formFields.active && <button className="btn btn-send-wp" onClick={sendWp} >Enviar por Whatsapp</button>}
                     </div>
+
+                    {formFeedback.active && (
+                        <div className={`snackbar ${formFeedback.className}`}>
+                            {formFeedback.msg}
+                        </div>
+                    )}
 
                 </div>
             </div>
