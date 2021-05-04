@@ -1,41 +1,39 @@
 import React from 'react'
 
-export const InfoTerreno = ({ manzana, area=95, lotNum, available, isCorner=true, type }) => {
+export const InfoTerreno = ({ manzana, area = 95, lotNum, available, isCorner = true, type }) => {
 
-    const firstPrice = ((!isCorner ? 1250 : 1550) * (area.$numberDecimal ? area.$numberDecimal : area)).toFixed(2);
+    const firstPrice = ((!isCorner ? 677.0833333 : 1550) * (area.$numberDecimal ? area.$numberDecimal : area)).toFixed(2);
 
     const [ints, decs] = firstPrice.split('.');
 
     const price = `${(+ints).toLocaleString()}.${decs}`;
 
     return (
- 
-        <div className={`lot ${available && 'sold' }`} >
+
+        <div className={`lot ${available && 'sold'}`} >
             <h3 className="lot__title">
                 Información del Lote
             </h3>
 
             <p className="lot__field" >Manzana: <strong>{manzana}</strong> </p>
             <p className="lot__field" >Número de lote: <strong>{lotNum}</strong> </p>
-            <p className="lot__field area" >Área: <strong>{area.$numberDecimal ? area.$numberDecimal : area  }m<sup>2</sup></strong> </p>
-            <p className="lot__field">Precio del lote: <strong>${price}mxn</strong></p>
+            <p className="lot__field area" >Área: <strong>{area.$numberDecimal ? area.$numberDecimal : area}m<sup>2</sup></strong> </p>
+            {available && !isCorner && <p className="lot__field">Precio del lote: <strong>${price}mxn</strong></p>}
+            {type === 'A' && available && !isCorner ? <p className="lot__field">Enganche: <strong>$20,000.00mxn</strong></p> : null}
 
-            { type === 'A' ? <p className="lot__field">Enganche: <strong>$35,000.00mxn</strong></p> : null}
-
-            <p className="lot__field finance">Financiamiento a <u><strong>30 meses sin intereses.</strong></u> </p>
+            {available && <p className="lot__field finance">Financiamiento a <u><strong>30 meses sin intereses.</strong></u> </p>}
 
             {
                 !available && <p className="lot__btn sold">Vendido</p>
             }
 
-            <p className="lot__field svcs">Incluye todos los servicios</p>
 
             <div className="lot__info">
                 <div className="lot__info__item">
                     <p>Red de Agua y Drenaje</p>
                     <svg><use href="./assets/svg/faucet.svg#faucet"></use></svg>
                 </div>
-                <div className="lot__info__item">
+                {/* <div className="lot__info__item">
                     <p>Banqueta y Cordonería</p>
                     <svg><use href="./assets/svg/walking.svg#walking"></use></svg>
                 </div>
@@ -50,10 +48,8 @@ export const InfoTerreno = ({ manzana, area=95, lotNum, available, isCorner=true
                 <div className="lot__info__item">
                     <p>Pavimento</p>
                     <svg><use href="./assets/svg/road.svg#road"></use></svg>
-                </div>
+                </div> */}
             </div>
-
-
 
             {
                 available && <a href="#contacto" className="lot__btn">Pedir información</a>

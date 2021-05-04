@@ -17,7 +17,7 @@ export const Terrenos = () => {
 
     const [isSelected, setIsSelected] = useState(null);
 
-    const { data } = useFetch('/api/lot');
+    const { data } = useFetch('https://colinasdelmar.sibradgo.com/api/lot');
 
     const { lotId, manzana, area, available, isCorner, type } = state;
 
@@ -67,7 +67,7 @@ export const Terrenos = () => {
 
                 <div className="terrenos__img">
 
-                    <img id='terrenos-img' src="./assets/images/terreno.jpg" alt="terreno"></img>
+                    <img id='terrenos-img' src="./assets/images/terreno1.jpg" alt="terreno"></img>
 
 
                     <svg id="lots-container" className="terrenos__base" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">

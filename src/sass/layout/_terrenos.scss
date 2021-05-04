@@ -111,9 +111,12 @@
                     padding: 2rem 0;
                     border-bottom: 1px solid $color-text;
                     transition: .3s ease-in-out;
+                    margin: 4rem 0;
+                    border-top: .5px solid $color-text;
+                    border-bottom: .5px solid $color-text;
 
                     &:last-child {
-                        border: none;
+                        // border: none;
                     }
 
                     & svg {
