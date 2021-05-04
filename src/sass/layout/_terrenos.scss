@@ -81,6 +81,7 @@
                 animation-name: appear;
                 animation-duration: 1s;
                 transition: .3s ease-in-out;
+                line-height: 3.5rem;
 
                 &.area {
                     margin: 2rem 0;
@@ -165,8 +166,7 @@
         stroke-width: 3px;
         transition: .3s all ease-in-out;
         cursor: pointer;
-
-
+        opacity: .5;
     }
 
     & .available .cls-1 {

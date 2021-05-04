@@ -2,11 +2,20 @@ import React from 'react'
 
 export const InfoTerreno = ({ manzana, area = 95, lotNum, available, isCorner = true, type }) => {
 
-    const firstPrice = ((!isCorner ? 677.0833333 : 1550) * (area.$numberDecimal ? area.$numberDecimal : area)).toFixed(2);
+    const firstPrice = ((!isCorner ? 677.0833333 : 833.3333) * (area.$numberDecimal ? area.$numberDecimal : area)).toFixed(2);
 
     const [ints, decs] = firstPrice.split('.');
 
     const price = `${(+ints).toLocaleString()}.${decs}`;
+
+    const monthly = ((firstPrice - 20000) / 30).toFixed(2);
+
+    const [monthlyInts, monthlyDecs] = monthly.split('.');
+
+    const monthlyPrice = `${(+monthlyInts).toLocaleString()}.${monthlyDecs}`;
+
+    console.log(typeof +monthlyInts);
+
 
     return (
 
@@ -18,10 +27,19 @@ export const InfoTerreno = ({ manzana, area = 95, lotNum, available, isCorner = 
             <p className="lot__field" >Manzana: <strong>{manzana}</strong> </p>
             <p className="lot__field" >Número de lote: <strong>{lotNum}</strong> </p>
             <p className="lot__field area" >Área: <strong>{area.$numberDecimal ? area.$numberDecimal : area}m<sup>2</sup></strong> </p>
-            {available && !isCorner && <p className="lot__field">Precio del lote: <strong>${price}mxn</strong></p>}
-            {type === 'A' && available && !isCorner ? <p className="lot__field">Enganche: <strong>$20,000.00mxn</strong></p> : null}
+            {available && <p className="lot__field">Precio del lote: <strong>${price}mxn</strong></p>}
+            {available && (
+                <>
+                    <p className="lot__field">Enganche: <strong>$20,000.00mxn</strong></p>
+                </>
+            )}
 
-            {available && <p className="lot__field finance">Financiamiento a <u><strong>30 meses sin intereses.</strong></u> </p>}
+            {available && (
+                <>
+                    <p className="lot__field finance">Financiamiento a <u><strong>30 meses sin intereses.</strong></u> </p>
+                    <p className="lot__field">Mensualidades de: <strong>${monthlyPrice}mxn</strong></p>
+                </>
+            )}
 
             {
                 !available && <p className="lot__btn sold">Vendido</p>
