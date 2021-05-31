@@ -31,7 +31,7 @@ export const ContactForm = () => {
 
 
     const sendWp = () => {
-        const wpMsg = `https://api.whatsapp.com/send/?phone=%2B526181479256&text=Buen día, quisiera pedir informes sobre el terreno número ${formFields.lotId} de la manzana ${formFields.manzana} del proyecto Colinas del Mar`;
+        const wpMsg = `https://api.whatsapp.com/send/?phone=%2B526183353212&text=Buen día, quisiera pedir informes sobre el terreno número ${formFields.lotId} de la manzana ${formFields.manzana} del proyecto Colinas del Mar`;
 
         window.open(wpMsg);
     }
