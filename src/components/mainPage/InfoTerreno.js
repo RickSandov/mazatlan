@@ -24,22 +24,25 @@ export const InfoTerreno = ({ manzana, area = 95, lotNum, available, isCorner = 
                 Información del Lote
             </h3>
 
-            <p className="lot__field" >Manzana: <strong>{manzana}</strong> </p>
-            <p className="lot__field" >Número de lote: <strong>{lotNum}</strong> </p>
-            <p className="lot__field area" >Área: <strong>{area.$numberDecimal ? area.$numberDecimal : area}m<sup>2</sup></strong> </p>
-            {available && <p className="lot__field">Precio del lote: <strong>${price}mxn</strong></p>}
-            {available && (
+            {/* <p className="lot__field" >Manzana: <strong>{manzana}</strong> </p>
+            <p className="lot__field" >Número de lote: <strong>{lotNum}</strong> </p> */}
+
+            {area !== 0 && <p className="lot__field area" >Área: <strong>{area.$numberDecimal ? area.$numberDecimal : area}m<sup>2</sup></strong> </p>}
+
+            {(available && area !== 0) && <p className="lot__field">Precio del lote: <strong>${price}mxn</strong></p>}
+            {(available && area !== 0) && (
                 <>
                     <p className="lot__field">Enganche: <strong>$20,000.00mxn</strong></p>
                 </>
             )}
 
-            {available && (
+            {(available && area !== 0) && (
                 <>
                     <p className="lot__field finance">Financiamiento a <u><strong>30 meses sin intereses.</strong></u> </p>
                     <p className="lot__field">Mensualidades de: <strong>${monthlyPrice}mxn</strong></p>
                 </>
-            )}
+            )
+            }
 
             {
                 !available && <p className="lot__btn sold">Vendido</p>
