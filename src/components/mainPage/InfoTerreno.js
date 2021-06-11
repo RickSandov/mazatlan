@@ -14,9 +14,6 @@ export const InfoTerreno = ({ manzana, area, lotNum, available, isCorner = true,
 
     const monthlyPrice = `${(+monthlyInts).toLocaleString()}.${monthlyDecs}`;
 
-    console.log(typeof +monthlyInts);
-
-
     return (
 
         <div className={`lot ${available && 'sold'}`} >
@@ -24,21 +21,28 @@ export const InfoTerreno = ({ manzana, area, lotNum, available, isCorner = true,
                 Información del Lote
             </h3>
 
-            {/* <p className="lot__field" >Manzana: <strong>{manzana}</strong> </p>
-            <p className="lot__field" >Número de lote: <strong>{lotNum}</strong> </p> */}
+            <p className="lot__field" >Manzana: <strong>{manzana}</strong> </p>
+            <p className="lot__field" >Número de lote: <strong>{lotNum}</strong> </p>
 
             {area && <p className="lot__field area" >Área: <strong>{area.$numberDecimal ? area.$numberDecimal : area}m<sup>2</sup></strong> </p>}
 
             {(available && area) && <p className="lot__field">Precio del lote: <strong>${price}mxn</strong></p>}
-            {(available && area) && (
+            {(available) && (
                 <>
                     <p className="lot__field">Enganche: <strong>$20,000.00mxn</strong></p>
                 </>
             )}
 
-            {(available && area) && (
+            {(available) && (
                 <>
                     <p className="lot__field finance">Financiamiento a <u><strong>30 meses sin intereses.</strong></u> </p>
+                </>
+            )
+            }
+
+            {(available && area) && (
+                <>
+                    
                     <p className="lot__field">Mensualidades de: <strong>${monthlyPrice}mxn</strong></p>
                 </>
             )
